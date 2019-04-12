@@ -31,28 +31,28 @@
 
 #define SERVER_STRING "Server: jdbhttpd/0.1.0\r\n"
 
-void accept_request(int);//
-void bad_request(int);
+void accept_request(int);//处理httpd请求
+void bad_request(int);//返回语法错误
 
-void cat(int, FILE *);
+void cat(int, FILE *);//处理静态请求，读取文件并逐行返回
 
-void cannot_execute(int);
+void cannot_execute(int);//创建管道失败时调用，返回500错误
 
-void error_die(const char *);
+void error_die(const char *);//调用perroe打印错误信息
 
-void execute_cgi(int, const char *, const char *, const char *);
+void execute_cgi(int, const char *, const char *, const char *);//建立子进程执行cgi程序
 
-int get_line(int, char *, int);
+int get_line(int, char *, int);//每个从socket中读取一行数据
 
-void headers(int, const char *);
+void headers(int, const char *);//返回响应头部
 
-void not_found(int);
+void not_found(int);//请求文件不存在时返回404错误
 
-void serve_file(int, const char *);
+void serve_file(int, const char *);//处理静态请求
 
-int startup(u_short *);
+int startup(u_short *);//初始化httpd请求
 
-void unimplemented(int);
+void unimplemented(int);//只实现了post和get，其他请求返回501错误
 
 /**********************************************************************/
 /* A request has caused a call to accept() on the server port to
